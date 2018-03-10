@@ -108,3 +108,5 @@ E:\учеба\C#\E-learning-portal\E-learning-portal\bin\ru\Microsoft.Owin.Secur
 E:\учеба\C#\E-learning-portal\E-learning-portal\obj\Debug\E-learning-portal.csprojResolveAssemblyReference.cache
 E:\учеба\C#\E-learning-portal\E-learning-portal\obj\Debug\E-learning-portal.dll
 E:\учеба\C#\E-learning-portal\E-learning-portal\obj\Debug\E-learning-portal.pdb
+E:\учеба\C#\E-learning-portal\E-learning-portal\obj\Debug\E_learning_portal.Migrations.InitialCreate.resources
+E:\учеба\C#\E-learning-portal\E-learning-portal\obj\Debug\E-learning-portal.csproj.GenerateResource.Cache
