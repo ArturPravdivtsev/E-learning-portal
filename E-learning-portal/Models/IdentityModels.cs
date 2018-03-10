@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using E_learning_portal.Models.MyModels;
 
 namespace E_learning_portal.Models
 {
@@ -24,7 +25,11 @@ namespace E_learning_portal.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
+        public DbSet<Classbook> Classbooks { get; set; }
+        public DbSet<Material> Materials { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<MyModels.Task> Tasks { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

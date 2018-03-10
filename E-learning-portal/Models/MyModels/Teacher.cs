@@ -7,5 +7,18 @@ namespace E_learning_portal.Models.MyModels
 {
     public class Teacher
     {
+        public int TeacherId { get; set; }
+        [System.ComponentModel.DisplayName("Фамилия")]
+        public string Surname { get; set; }
+        [System.ComponentModel.DisplayName("Имя")]
+        public string Name { get; set; }
+        [System.ComponentModel.DisplayName("Отчество")]
+        public string Patronymic { get; set; }
+        [System.ComponentModel.DisplayName("Кафедра")]
+        public string Department { get; set; }
+
+        public virtual ICollection<Classbook> Classbooks { get; set; }
+        public virtual ICollection<Material> Materials { get; set; }
+        public virtual ICollection<Task> Tassk { get; set; }
     }
 }
