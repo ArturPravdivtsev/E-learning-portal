@@ -1,0 +1,37 @@
+﻿@model IEnumerable<E_learning_portal.Models.MyModels.Material>
+@{
+    ViewBag.Title = "Materials";
+}
+
+<h2>Material</h2>
+@Html.ActionLink("Добавить", "Create", "Material") 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.TeacherId == ViewBag.Teacher.TeacherId)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaterialId }) |
+                    @Html.ActionLink("Детали", "Details", new { id = item.MaterialId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaterialId })
+                </td>
+            </tr>
+        }
+    }
+</table>
