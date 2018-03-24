@@ -36,7 +36,7 @@
     </div>
     <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
         <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-        <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Материал", "Material", "Teacher")</a>
+        <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Материал", "Material", "Material")</a>
         <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("О программе", "About", "Home")</a>
         <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("О программе", "About", "Home")</a>
     </div>
@@ -51,16 +51,16 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    
     @Scripts.Render("~/bundles/bootstrap")
-    <script>
-    function w3_open() {
+    
+    <script>function w3_open() {
     document.getElementById("mySidebar").style.display = "block";
-    }
-    function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    }
-    </script>
+}
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+</script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

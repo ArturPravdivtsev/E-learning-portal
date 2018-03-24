@@ -75,13 +75,12 @@ namespace E_learning_portal.Controllers.MyControllers
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
             string ID = currentUser.Id;
             Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            IEnumerable<Material> material = db.Materials;
-            //Include("Teacher");
+            IEnumerable<Material> material = db.Materials.Include("Teacher");
             var selectedMaterial = from materials in material
                                 where materials.TeacherId == t.TeacherId 
                                 select materials;
             //SelectList teachers = new SelectList(db.Teachers,"TeacherId","TeacherId");
-            //ViewBag.Teacher = teachers;
+            //ViewBag.Teacher = context.teacher;
             return View(selectedMaterial);
         }
 

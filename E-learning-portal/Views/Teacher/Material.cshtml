@@ -17,7 +17,7 @@
 
     @foreach (var item in Model)
     {
-        if (item.TeacherId == ViewBag.Teacher.TeacherId)
+        if (item.TeacherId == item.Teacher.TeacherId)
         {
             <tr>
                 <td>
@@ -27,9 +27,9 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaterialId }) |
-                    @Html.ActionLink("Детали", "Details", new { id = item.MaterialId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MaterialId })
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.MaterialId }) |
+                    @Html.ActionLink("Детали", "TeacherMaterialDetails", new { id = item.MaterialId }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.MaterialId })
                 </td>
             </tr>
         }

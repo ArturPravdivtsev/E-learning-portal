@@ -23,9 +23,17 @@ namespace E_learning_portal
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+                     "~/Scripts/jquery-3.3.1.min.js",
+                     "~/Scripts/Scripts.js"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.css"
+                      ));
+            bundles.Add(new StyleBundle("~/Content/cssm").Include(
+                      "~/Content/ForMaterial.css"
+                      ));
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace E_learning_portal.Models.MyModels
 {
@@ -18,12 +19,16 @@ namespace E_learning_portal.Models.MyModels
         public string Department { get; set; }
         [System.ComponentModel.DisplayName("Факультет")]
         public string Faculty { get; set; }
+        [AllowHtml]
         [System.ComponentModel.DisplayName("Содержимое")]
         public byte[] Content { get; set; }
         [System.ComponentModel.DisplayName("Имя файла")]
         public string FileName { get; set; }
+        [AllowHtml]
         [System.ComponentModel.DisplayName("Текст")]
         public string Fil { get; set; }
+       // public HttpPostedFileBase Image { get; set; }
+
 
         public int? TeacherId { get; set; }
         public Teacher Teacher { get; set; }

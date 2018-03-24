@@ -1,7 +1,10 @@
 ﻿using E_learning_portal.Models;
 using E_learning_portal.Models.MyModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,12 +15,91 @@ namespace E_learning_portal.Controllers.MyControllers
     {
         ApplicationDbContext context = new ApplicationDbContext();
 
+        public ActionResult Material(int? id)
+        {
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+            string ID = currentUser.Id;
+            Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
+            IEnumerable<Material> material = context.Materials.Include("Teacher");
+            var selectedMaterial = from materials in material
+                                   where materials.TeacherId == t.TeacherId
+                                   select materials;
+            return View(selectedMaterial);
+        }
+
         public ActionResult Create()
         {
-
+            
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Create(Material material)
+        {
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            string ID = currentUser.Id;
+            Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
+            material.TeacherId = teacher.TeacherId;
+            context.Materials.Add(material);
+            context.SaveChanges();
+            return View("MaterialView", material);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+
+            Material material = context.Materials.SingleOrDefault(p => p.MaterialId == id);
+            return View(material);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Material material)
+        {
+            Material materialContext = context.Materials.SingleOrDefault(p => p.MaterialId == material.MaterialId);
+            materialContext.Name = material.Name;
+            materialContext.Subject = material.Subject;
+            materialContext.Course = material.Course;
+            materialContext.Department = material.Department;
+            materialContext.Faculty = material.Faculty;
+            materialContext.Fil = material.Fil;
+            context.SaveChanges();
+
+            return RedirectToAction("Material");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+
+            Material material = context.Materials.SingleOrDefault(p => p.MaterialId == id);
+            context.Materials.Remove(material);
+            context.SaveChanges();
+            return RedirectToAction("Material");
+        }
+
+        public ActionResult TeacherMaterialDetails(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+
+            Material material = context.Materials.SingleOrDefault(p => p.MaterialId == id);
+
+            return View(material);
+        }
 
         public ActionResult FDetails()
         {
@@ -118,5 +200,11 @@ namespace E_learning_portal.Controllers.MyControllers
 
             return View();
         }
+    }
+
+    public class Result
+    {
+        public string Error { get; set; }
+        public List<string> Files { get; set; }
     }
 }

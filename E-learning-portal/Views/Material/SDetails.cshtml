@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Kyrsach.Models.My_Models.Material>
+
+@{
+    ViewBag.Title = "Предметы";
+}
+
+<h2>Предметы</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+
+        <td>
+            @Html.ActionLink("Далее", "NDetails", new { id=item.MaterialId }) |
+        </td>
+    </tr>
+}
+
+</table>
+
