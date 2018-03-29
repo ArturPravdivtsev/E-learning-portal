@@ -1,0 +1,33 @@
+﻿@model IEnumerable<E_learning_portal.Models.MyModels.Classbook>
+
+@{
+    ViewBag.Title = "GDetails";
+}
+
+<h2>GDetails</h2>
+
+<p>
+    @Html.ActionLink("Создать", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ClassbookId }) |
+            @Html.ActionLink("Далее", "Students", new { id=item.ClassbookId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ClassbookId })
+        </td>
+    </tr>
+}
+
+</table>

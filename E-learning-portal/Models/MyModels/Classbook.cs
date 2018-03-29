@@ -14,10 +14,16 @@ namespace E_learning_portal.Models.MyModels
         public int Mark { get; set; }
         [System.ComponentModel.DisplayName("Дата")]
         DateTime Date { get; set; }
+        [System.ComponentModel.DisplayName("Предмет")]
+        public string Subject { get; set; }
+        [System.ComponentModel.DisplayName("Курс")]
+        public int Course { get; set; }
 
         public int? TeacherId { get; set; }
         public Teacher Teacher { get; set; }
         public int? StudentId { get; set; }
         public Student Student { get; set; }
+
+        public IEnumerable<Group> Groups { get; set; }
     }
 }

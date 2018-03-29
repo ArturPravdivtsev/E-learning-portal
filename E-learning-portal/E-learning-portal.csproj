@@ -223,6 +223,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MyModels\Classbook.cs" />
+    <Compile Include="Models\MyModels\Group.cs" />
     <Compile Include="Models\MyModels\Material.cs" />
     <Compile Include="Models\MyModels\MaterialInitializer.cs" />
     <Compile Include="Models\MyModels\Student.cs" />
@@ -307,13 +308,22 @@
     <Content Include="Views\Material\Material.cshtml" />
     <Content Include="Views\Material\Edit.cshtml" />
     <Content Include="Views\Material\TeacherMaterialDetails.cshtml" />
+    <Content Include="Views\Task\Task.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\Edit.cshtml" />
+    <Content Include="Views\Task\TeacherTaskDetails.cshtml" />
+    <Content Include="Views\Task\TaskView.cshtml" />
+    <Content Include="Views\Classbook\Index.cshtml" />
+    <Content Include="Views\Classbook\GDetails.cshtml" />
+    <Content Include="Views\Classbook\Students.cshtml" />
+    <Content Include="Views\Classbook\CreateCourse.cshtml" />
+    <Content Include="Views\Classbook\CourseEdit.cshtml" />
+    <Content Include="Views\Classbook\CourseDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="uploads\" />
-    <Folder Include="Views\Classbook\" />
     <Folder Include="Views\Student\" />
-    <Folder Include="Views\Task\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
