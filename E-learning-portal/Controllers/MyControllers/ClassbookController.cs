@@ -23,174 +23,233 @@ namespace E_learning_portal.Controllers.MyControllers
             Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
             IEnumerable<Classbook> classbook = context.Classbooks.Include("Teacher");
             var selectedClassbook = from classbooks in classbook
-                                   where classbooks.TeacherId == t.TeacherId
-                                   select classbooks;
+                                    where classbooks.TeacherId == t.TeacherId
+                                    select classbooks;
             return View(selectedClassbook.Distinct());
         }
 
-        public ActionResult CourseDetails(int? id)
+        public ActionResult AddMark()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
-            List<Classbook> list = context.Classbooks.ToList().FindAll(p => p.ClassbookId == id);
-            return View(list.Distinct());
-        }
-
-        [HttpGet]
-        public ActionResult CourseCreate(int? id)
-        {
-
             return View();
         }
 
         [HttpPost]
-        public ActionResult CourseCreate(Classbook classbook)
+        public ActionResult AddMarkData()
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
-
             string ID = currentUser.Id;
-            Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            classbook.TeacherId = teacher.TeacherId;
-            context.Classbooks.Add(classbook);
-            context.SaveChanges();
-            return View();
-        }
-        [HttpGet]
-        public ActionResult CourseEdit(int? id)
-        {
-            if (id == null)
+            Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
+
+            string Course = Request.Form["txtCourse"]; string Subject = Request.Form["txtSubject"];
+            string Name = Request.Form["txtName"]; string Surname = Request.Form["txtSurname"];
+            string TaskName = Request.Form["txtTaskName"]; string Mark = Request.Form["txtMark"];
+            string Date = Request.Form["txtDate"];
+
+            //Student student = context.Students.Select(p => p.Name == Name);
+            IEnumerable<Student> students = context.Students;
+                var selectedStudent = from student in students
+                               where student.Name == Name && student.Surname == Surname
+                               select student.StudentId;
+            IEnumerable<Task> tasks = context.Tasks;
+            var selectedTask = from task in tasks
+                                  where task.Subject == Subject && task.Course == Int32.Parse(Course) 
+                                  && task.Name == TaskName && task.TeacherId == t.TeacherId && task.StudentId == selectedStudent.Single()
+                               select task;
+            IEnumerable<Classbook> classbooks = context.Classbooks;
+            var selectedClassbook = from classbooc in classbooks
+                               where classbooc.Subject == Subject && classbooc.Course == Int32.Parse(Course)
+                               && classbooc.TeacherId == t.TeacherId 
+                               && classbooc.StudentId == selectedStudent.Single()
+                               select classbooc;
+            try 
             {
-                return new HttpStatusCodeResult(404);
+                var s =selectedClassbook.Single();
             }
-
-            Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
-            return View(classbook);
-        }
-
-        [HttpPost]
-        public ActionResult CourseEdit(Classbook classbook)
-        {
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
-
-            string ID = currentUser.Id;
-            Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            Classbook classbookContext = context.Classbooks.SingleOrDefault(p => p.ClassbookId == classbook.ClassbookId);
-            classbookContext.Course = classbook.Course;
-            classbookContext.TeacherId = teacher.TeacherId;
-            context.SaveChanges();
-
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult CourseDelete(int? id)
-        {
-            if (id == null)
+            catch (System.InvalidOperationException)
             {
-                return new HttpStatusCodeResult(404);
+                Classbook classbook = new Classbook
+                {
+                    TeacherId = t.TeacherId,
+                    Course = Int32.Parse(Course),
+                    Subject = Subject,
+                    StudentId = selectedStudent.Single(),
+                    Task = selectedTask.Single(),
+                    Mark = Int32.Parse(Mark),
+                    Date = DateTime.Parse(Date)
+                };
             }
-
-            Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
-            context.Classbooks.Remove(classbook);
-            context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult SubjectDetails(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
-            List<Classbook> list = context.Classbooks.ToList().FindAll(p => p.ClassbookId == id);
-            return View(list.Distinct());
-        }
-
-        [HttpGet]
-        public ActionResult SubjectCreate(int? id)
-        {
+            //else
+            //{
+            //    return Json("Строка возвращена с сервера");
+            //}
 
             return View();
         }
 
-        [HttpPost]
-        public ActionResult SubjectCreate(Classbook classbook)
-        {
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+        //public ActionResult CourseDetails(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(404);
+        //    }
+        //    List<Classbook> list = context.Classbooks.ToList().FindAll(p => p.ClassbookId == id);
+        //    return View(list.Distinct());
+        //}
 
-            string ID = currentUser.Id;
-            Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            classbook.TeacherId = teacher.TeacherId;
-            context.Classbooks.Add(classbook);
-            context.SaveChanges();
-            return View();
-        }
-        [HttpGet]
-        public ActionResult SubjectEdit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
+        //[HttpGet]
+        //public ActionResult CourseCreate(int? id)
+        //{
 
-            Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
-            return View(classbook);
-        }
+        //    return View();
+        //}
 
-        [HttpPost]
-        public ActionResult SubjectEdit(Classbook classbook)
-        {
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+        //[HttpPost]
+        //public ActionResult CourseCreate(Classbook classbook)
+        //{
+        //    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+        //    ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
 
-            string ID = currentUser.Id;
-            Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            Classbook classbookContext = context.Classbooks.SingleOrDefault(p => p.ClassbookId == classbook.ClassbookId);
-            classbookContext.Course = classbook.Course;
-            classbookContext.TeacherId = teacher.TeacherId;
-            context.SaveChanges();
+        //    string ID = currentUser.Id;
+        //    Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
+        //    classbook.TeacherId = teacher.TeacherId;
+        //    context.Classbooks.Add(classbook);
+        //    context.SaveChanges();
+        //    return View("Index");
+        //}
+        //[HttpGet]
+        //public ActionResult CourseEdit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(404);
+        //    }
 
-            return RedirectToAction("CourseDetails");
-        }
+        //    Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
+        //    return View(classbook);
+        //}
 
-        public ActionResult SubjectDelete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
+        //[HttpPost]
+        //public ActionResult CourseEdit(Classbook classbook)
+        //{
+        //    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+        //    ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
 
-            Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
-            context.Classbooks.Remove(classbook);
-            context.SaveChanges();
-            return RedirectToAction("CourseDetails");
-        }
+        //    string ID = currentUser.Id;
+        //    Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
+        //    Classbook classbookContext = context.Classbooks.SingleOrDefault(p => p.ClassbookId == classbook.ClassbookId);
+        //    classbookContext.Course = classbook.Course;
+        //    classbookContext.TeacherId = teacher.TeacherId;
+        //    context.SaveChanges();
 
-        public ActionResult GDetails(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
+        //    return RedirectToAction("Index");
+        //}
 
-            List<Classbook> list = context.Classbooks.ToList().FindAll(p => p.ClassbookId == id);
-            return View(list.Distinct());
-        }
+        //public ActionResult CourseDelete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(404);
+        //    }
 
-        
+        //    Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
+        //    context.Classbooks.Remove(classbook);
+        //    context.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
-        public ActionResult Students(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
-            List<Classbook> list = context.Classbooks.ToList().FindAll(p => p.ClassbookId == id);
-            return View();
-        }
+        //public ActionResult SubjectDetails(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(404);
+        //    }
+        //    List<Classbook> list = context.Classbooks.ToList().FindAll(p => p.ClassbookId == id);
+        //    return View(list.Distinct());
+        //}
+
+        //[HttpGet]
+        //public ActionResult SubjectCreate(int? id)
+        //{
+
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public ActionResult SubjectCreate(Classbook classbook)
+        //{
+        //    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+        //    ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+        //    string ID = currentUser.Id;
+        //    Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
+        //    classbook.TeacherId = teacher.TeacherId;
+        //    context.Classbooks.Add(classbook);
+        //    context.SaveChanges();
+        //    return View("CourseDetails");
+        //}
+        //[HttpGet]
+        //public ActionResult SubjectEdit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(404);
+        //    }
+
+        //    Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
+        //    return View(classbook);
+        //}
+
+        //[HttpPost]
+        //public ActionResult SubjectEdit(Classbook classbook)
+        //{
+        //    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+        //    ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+        //    string ID = currentUser.Id;
+        //    Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
+        //    Classbook classbookContext = context.Classbooks.SingleOrDefault(p => p.ClassbookId == classbook.ClassbookId);
+        //    classbookContext.Course = classbook.Course;
+        //    classbookContext.TeacherId = teacher.TeacherId;
+        //    context.SaveChanges();
+
+        //    return RedirectToAction("CourseDetails");
+        //}
+
+        //public ActionResult SubjectDelete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(404);
+        //    }
+
+        //    Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
+        //    context.Classbooks.Remove(classbook);
+        //    context.SaveChanges();
+        //    return RedirectToAction("CourseDetails");
+        //}
+
+        //public ActionResult GDetails(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(404);
+        //    }
+
+        //    List<Classbook> list = context.Classbooks.ToList().FindAll(p => p.ClassbookId == id);
+        //    return View(list.Distinct());
+        //}
+
+
+
+        //public ActionResult Students(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(404);
+        //    }
+        //    List<Classbook> list = context.Classbooks.ToList().FindAll(p => p.ClassbookId == id);
+        //    return View();
+        //}
     }
 }

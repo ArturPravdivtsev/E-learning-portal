@@ -316,9 +316,11 @@
     <Content Include="Views\Classbook\Index.cshtml" />
     <Content Include="Views\Classbook\GDetails.cshtml" />
     <Content Include="Views\Classbook\Students.cshtml" />
-    <Content Include="Views\Classbook\CreateCourse.cshtml" />
     <Content Include="Views\Classbook\CourseEdit.cshtml" />
     <Content Include="Views\Classbook\CourseDetails.cshtml" />
+    <Content Include="Views\Classbook\CourseCreate.cshtml" />
+    <Content Include="Views\Classbook\SubjectCreate.cshtml" />
+    <Content Include="Views\Classbook\AddMark.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,6 +333,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,10 +7,19 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Создать", "CourseCreate")
+    @Html.ActionLink("Создать запись", "AddMark")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Mark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Course)
         </th>
@@ -20,12 +29,21 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Mark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Course)
         </td>
         <td>
-            @Html.ActionLink("Редактировать", "CourseEdit", new { id=item.ClassbookId }) |
-            @Html.ActionLink("Далее", "CourseDetails", new { id=item.ClassbookId }) |
-            @Html.ActionLink("Удалить", "CourseDelete", new { id=item.ClassbookId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.ClassbookId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ClassbookId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ClassbookId })
         </td>
     </tr>
 }

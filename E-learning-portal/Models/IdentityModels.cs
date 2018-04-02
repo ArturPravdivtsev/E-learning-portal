@@ -35,14 +35,5 @@ namespace E_learning_portal.Models
         {
             return new ApplicationDbContext();
         }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Group>().HasMany(c => c.Students)
-                .WithMany(s => s.Groups)
-                .Map(t => t.MapLeftKey("CourseId")
-                .MapRightKey("StudentId")
-                .ToTable("CourseStudent"));
-        }
     }
 }

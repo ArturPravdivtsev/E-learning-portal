@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "AddMark";
+}
+
+<h2>AddMark</h2>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+@using (Html.BeginForm("AddMarkData", "Classbook"))
+{
+    <ol>
+        <li>
+            @Html.Label("Курс")
+            <input class="w3-input"
+                   name="txtCourse"
+                   type="text"
+                   value="" />
+        </li>
+        <li>
+            @Html.Label("Предмет")
+            <input class="w3-input"
+                   name="txtSubject"
+                   type="text"
+                   value="" />
+        </li>
+        <li>
+            @Html.Label("Имя студента")
+            <input class="w3-input"
+                   name="txtName"
+                   type="text"
+                   value="" />
+        </li>
+        <li>
+            @Html.Label("Фамилия студента")
+            <input class="w3-input"
+                   name="txtSurname"
+                   type="text"
+                   value="" />
+        </li>
+        <li>
+            @Html.Label("Название задания")
+            <input class="w3-input"
+                   name="txtTaskNAme"
+                   type="text"
+                   value="" />
+        </li>
+        <li>
+            @Html.Label("Оценка")
+            <input class="w3-input"
+                   name="txtMark"
+                   type="text"
+                   value="" />
+        </li>
+        <li>
+            @Html.Label("Дата")
+            <input class="w3-input"
+                   name="txtDate"
+                   type="text"
+                   value="" />
+        </li>
+    </ol>
+    <input type="submit" value="Добавить" />
+}
+<div id="divResult"></div>

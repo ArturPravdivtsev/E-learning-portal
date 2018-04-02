@@ -13,7 +13,7 @@ namespace E_learning_portal.Models.MyModels
         [System.ComponentModel.DisplayName("Оценка")]
         public int Mark { get; set; }
         [System.ComponentModel.DisplayName("Дата")]
-        DateTime Date { get; set; }
+        public DateTime Date { get; set; }
         [System.ComponentModel.DisplayName("Предмет")]
         public string Subject { get; set; }
         [System.ComponentModel.DisplayName("Курс")]
