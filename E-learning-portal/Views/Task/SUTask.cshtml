@@ -1,0 +1,42 @@
+﻿@model IEnumerable<E_learning_portal.Models.MyModels.Task>
+
+@{
+    ViewBag.Title = "Задания";
+}
+
+<h2>Задания</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course)
+            </td>
+            <td>
+                @Html.ActionLink("Детали", "UndoneDetails", new { id = item.TaskId })
+                @Html.ActionLink("Выполнить", "MakeTask", new { id = item.TaskId })
+            </td>
+        </tr>
+    }
+
+</table>

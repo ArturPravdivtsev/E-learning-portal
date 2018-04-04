@@ -6,17 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace E_learning_portal.Controllers.MyControllers
 {
     public class TeacherController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationDbContext context = new ApplicationDbContext();
         // GET: Teacher
         public ActionResult Index()
         {
-            ApplicationDbContext context = new ApplicationDbContext();
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
 
@@ -28,6 +28,7 @@ namespace E_learning_portal.Controllers.MyControllers
             context.Teachers.Add(teacher);
             context.SaveChanges();
             Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
+            
             return View(t);
         }
         [HttpGet]
@@ -37,7 +38,6 @@ namespace E_learning_portal.Controllers.MyControllers
             {
                 return new HttpStatusCodeResult(404);
             }
-            ApplicationDbContext context = new ApplicationDbContext();
             Teacher teacher = context.Teachers.SingleOrDefault(p => p.TeacherId == id);
             return View(teacher);
         }
@@ -45,7 +45,6 @@ namespace E_learning_portal.Controllers.MyControllers
         [HttpPost]
         public ActionResult Edit(Teacher teacher)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
             Teacher TeacherContext = context.Teachers
                 .SingleOrDefault(p => p.TeacherId == teacher.TeacherId);
             TeacherContext.Surname = teacher.Surname;
@@ -63,26 +62,25 @@ namespace E_learning_portal.Controllers.MyControllers
             {
                 return new HttpStatusCodeResult(404);
             }
-            ApplicationDbContext context = new ApplicationDbContext();
             Teacher teacher = context.Teachers.Single(p => p.TeacherId == id);
             return View(teacher);
         }
 
-        public ActionResult Material(int? id)
-        {
-            ApplicationDbContext context = new ApplicationDbContext();
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
-            string ID = currentUser.Id;
-            Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            IEnumerable<Material> material = db.Materials.Include("Teacher");
-            var selectedMaterial = from materials in material
-                                where materials.TeacherId == t.TeacherId 
-                                select materials;
-            //SelectList teachers = new SelectList(db.Teachers,"TeacherId","TeacherId");
-            //ViewBag.Teacher = context.teacher;
-            return View(selectedMaterial);
-        }
+        //public ActionResult Material(int? id)
+        //{
+        //    ApplicationDbContext context = new ApplicationDbContext();
+        //    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+        //    ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+        //    string ID = currentUser.Id;
+        //    Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
+        //    IEnumerable<Material> material = db.Materials.Include("Teacher");
+        //    var selectedMaterial = from materials in material
+        //                        where materials.TeacherId == t.TeacherId 
+        //                        select materials;
+        //    //SelectList teachers = new SelectList(db.Teachers,"TeacherId","TeacherId");
+        //    //ViewBag.Teacher = context.teacher;
+        //    return View(selectedMaterial);
+        //}
 
     }
 }

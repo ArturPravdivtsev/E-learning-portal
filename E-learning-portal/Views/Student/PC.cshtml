@@ -1,4 +1,4 @@
-﻿@model E_learning_portal.Models.MyModels.Teacher
+﻿@model E_learning_portal.Models.MyModels.Student
 
 @{
     ViewBag.Title = "Index";
@@ -23,19 +23,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Patronymic)
+            @Html.DisplayNameFor(model => model.GroupId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Patronymic)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Department)
+            @Html.DisplayFor(model => model.GroupId)
         </dd>
     </dl>
 </div>

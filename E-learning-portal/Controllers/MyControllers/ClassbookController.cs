@@ -25,7 +25,21 @@ namespace E_learning_portal.Controllers.MyControllers
             var selectedClassbook = from classbooks in classbook
                                     where classbooks.TeacherId == t.TeacherId
                                     select classbooks;
-            return View(selectedClassbook.Distinct());
+            return View(selectedClassbook.Distinct().GroupBy(p=>p.Course));
+        }
+
+        public ActionResult SIndex()
+        {
+            List<Classbook> list = context.Classbooks.ToList();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+            string ID = currentUser.Id;
+            Student t = context.Students.SingleOrDefault(p => p.Id == ID);
+            IEnumerable<Classbook> classbook = context.Classbooks.Include("Student");
+            var selectedClassbook = from classbooks in classbook
+                                    where classbooks.StudentId == t.StudentId
+                                    select classbooks;
+            return View(selectedClassbook.Distinct().GroupBy(p => p.Course));
         }
 
         public ActionResult AddMark()
@@ -78,13 +92,74 @@ namespace E_learning_portal.Controllers.MyControllers
                     Mark = Int32.Parse(Mark),
                     Date = DateTime.Parse(Date)
                 };
+                //goto m1;
             }
-            //else
-            //{
-            //    return Json("Строка возвращена с сервера");
-            //}
+            //var html = string.Empty;
+            //    html = "<div style='border: 1px solid red;margin-bottom:5px;'>"
+            //      + "Такая запись уже существует!"
+            //      + "</div>";
+            //return View("AddMark",html);
+            //m1:
+            return View("AddMark");
+        }
 
-            return View();
+        [HttpGet]
+        public ActionResult EditMark(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+
+            Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
+            SelectList students = new SelectList(context.Students, "StudentId", "Name,Surname");
+            ViewBag.Students = students;
+            return View(classbook);
+        }
+
+        [HttpPost]
+        public ActionResult EditMark(Classbook classbook)
+        {
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            string ID = currentUser.Id;
+            Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
+            Classbook classbookContext = context.Classbooks.SingleOrDefault(p => p.ClassbookId == classbook.ClassbookId);
+            classbookContext.Course = classbook.Course;
+            classbookContext.Mark = classbook.Mark;
+            classbookContext.Subject = classbook.Subject;
+            classbookContext.Date = classbook.Date;
+            classbookContext.TeacherId = teacher.TeacherId;
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteMark(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+
+            Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
+            context.Classbooks.Remove(classbook);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult MarkDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+            Classbook classbook = context.Classbooks.SingleOrDefault(p=>p.ClassbookId == id);
+            SelectList students = new SelectList(context.Students, "StudentId", "Name,Surname");
+            ViewBag.Students = students;
+            return View(classbook);
         }
 
         //public ActionResult CourseDetails(int? id)

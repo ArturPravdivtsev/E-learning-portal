@@ -1,0 +1,28 @@
+﻿@model IEnumerable<E_learning_portal.Models.MyModels.Material>
+
+@{
+    ViewBag.Title = "Факультет";
+}
+
+<h2>Факультет</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Faculty)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faculty)
+        </td>
+        <td>|
+            @Html.ActionLink("Details", "Department", new { id=item.MaterialId }) |
+        </td>
+    </tr>
+}
+
+</table>

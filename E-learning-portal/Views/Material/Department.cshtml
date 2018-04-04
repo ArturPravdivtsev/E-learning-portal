@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Kyrsach.Models.My_Models.Material>
+﻿@model IEnumerable<E_learning_portal.Models.MyModels.Material>
 
 @{
-    ViewBag.Title = "Кафедры";
+    ViewBag.Title = "Кафедра";
 }
 
-<h2>Кафедры</h2>
+<h2>Кафедра</h2>
 
 <table class="table">
     <tr>
@@ -20,7 +20,7 @@
             @Html.DisplayFor(modelItem => item.Department)
         </td>
         <td>|
-            @Html.ActionLink("Далее", "CDetails", new { id=item.MaterialId }) |
+            @Html.ActionLink("Details", "Course", new { id=item.MaterialId }) |
         </td>
     </tr>
 }

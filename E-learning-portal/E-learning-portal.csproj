@@ -314,18 +314,31 @@
     <Content Include="Views\Task\TeacherTaskDetails.cshtml" />
     <Content Include="Views\Task\TaskView.cshtml" />
     <Content Include="Views\Classbook\Index.cshtml" />
-    <Content Include="Views\Classbook\GDetails.cshtml" />
     <Content Include="Views\Classbook\Students.cshtml" />
-    <Content Include="Views\Classbook\CourseEdit.cshtml" />
-    <Content Include="Views\Classbook\CourseDetails.cshtml" />
-    <Content Include="Views\Classbook\CourseCreate.cshtml" />
-    <Content Include="Views\Classbook\SubjectCreate.cshtml" />
     <Content Include="Views\Classbook\AddMark.cshtml" />
+    <Content Include="Views\Classbook\EditMark.cshtml" />
+    <Content Include="Views\Classbook\MarkDetails.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\PC.cshtml" />
+    <Content Include="Views\Material\Faculty.cshtml" />
+    <Content Include="Views\Material\Department.cshtml" />
+    <Content Include="Views\Material\Course.cshtml" />
+    <Content Include="Views\Material\Subject.cshtml" />
+    <Content Include="Views\Material\Name.cshtml" />
+    <Content Include="Views\Material\Content.cshtml" />
+    <Content Include="Views\Task\STask.cshtml" />
+    <Content Include="Views\Task\SUTask.cshtml" />
+    <Content Include="Views\Task\SDTask.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\UndoneDetails.cshtml" />
+    <Content Include="Views\Task\DoneDetails.cshtml" />
+    <Content Include="Views\Task\DoneEdit.cshtml" />
+    <Content Include="Views\Task\MakeTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="uploads\" />
-    <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

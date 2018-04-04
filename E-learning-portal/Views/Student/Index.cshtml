@@ -1,10 +1,12 @@
-﻿@model E_learning_portal.Models.MyModels.Teacher
+﻿@model E_learning_portal.Models.MyModels.Student
 
 @{
     ViewBag.Title = "Index";
 }
+
+<h2>Index</h2>
+
 <div>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Surname)
@@ -23,24 +25,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Patronymic)
+            @Html.DisplayNameFor(model => model.GroupId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Patronymic)
+            @Html.DisplayFor(model => model.GroupId)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Department)
-        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Редактировать", "Edit") |
-    @Html.ActionLink("Назад", "Index")
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.StudentId }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>
-

@@ -101,57 +101,53 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(material);
         }
 
-        public ActionResult FDetails()
+        public ActionResult Faculty()
         {
             List<Material> list = context.Materials.ToList();
             return View(list.Distinct());
         }
 
-        public ActionResult DDetails(int? id)
+        public ActionResult Department(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(404);
             }
-            ApplicationDbContext context = new ApplicationDbContext();
             List<Material> list = context.Materials.ToList().FindAll(p => p.MaterialId == id);
             return View(list.Distinct());
         }
 
-        public ActionResult CDetails(int? id)
+        public ActionResult Course(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(404);
             }
-            ApplicationDbContext context = new ApplicationDbContext();
             List<Material> list = context.Materials.ToList().FindAll(p => p.MaterialId == id);
             return View(list.Distinct());
         }
 
-        public ActionResult SDetails(int? id)
+        public ActionResult Subject(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(404);
             }
-            ApplicationDbContext context = new ApplicationDbContext();
             List<Material> list = context.Materials.ToList().FindAll(p => p.MaterialId == id);
             return View(list.Distinct());
         }
 
-        public ActionResult NDetails(int? id)
+        public ActionResult Name(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(404);
             }
-            ApplicationDbContext context = new ApplicationDbContext();
             List<Material> list = context.Materials.ToList().FindAll(p => p.MaterialId == id);
             return View(list.Distinct());
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Content(int? id)
         {
             if (id == null)
             {

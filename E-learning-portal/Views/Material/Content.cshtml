@@ -1,4 +1,4 @@
-﻿@model Kyrsach.Models.My_Models.Material
+﻿@model E_learning_portal.Models.MyModels.Material
 
 @{
     ViewBag.Title = "Материал";
@@ -7,10 +7,13 @@
 <h2>Материал</h2>
 
 <div>
+    <h4>Material</h4>
+    <hr />
     <dl class="dl-horizontal">
         <dd>
-            @Html.ActionLink("Скачать", "Download", new { id = Model.MaterialId }) |
+            @Html.ActionLink("Скачать", "Download", new { id=Model.MaterialId});
         </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -18,11 +21,17 @@
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Fil)
         </dt>
+
         <dd>
             @Html.DisplayFor(model => model.Fil)
         </dd>
+
     </dl>
 </div>
+<p>
+    @Html.ActionLink("Назад", "Name")
+</p>

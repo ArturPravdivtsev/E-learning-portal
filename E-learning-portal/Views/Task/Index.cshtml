@@ -1,0 +1,8 @@
+﻿@model E_learning_portal.Models.MyModels.Task
+@{
+    ViewBag.Title = "Задания";
+}
+
+<h2>Задания</h2>
+@Html.ActionLink("Задания", "UTask", new { id = Model.TaskId });
+@Html.ActionLink("Выполненные задания", "DTask", new { id = Model.TaskId })

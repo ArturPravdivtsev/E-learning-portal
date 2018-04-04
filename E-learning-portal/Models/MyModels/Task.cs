@@ -20,6 +20,7 @@ namespace E_learning_portal.Models.MyModels
         [AllowHtml]
         [System.ComponentModel.DisplayName("Текст")]
         public string Fil { get; set; }
+        public bool done { get; set; }
 
         public int? TeacherId { get; set; }
         public Teacher Teacher { get; set; }
