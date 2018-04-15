@@ -155,7 +155,7 @@ namespace E_learning_portal.Controllers.MyControllers
             }
 
             Material material = context.Materials.SingleOrDefault(p => p.MaterialId == id);
-            material.Fil = System.Text.Encoding.GetEncoding(1251).GetString(material.Content);
+            //material.Fil = System.Text.Encoding.GetEncoding(1251).GetString(material.Content);
 
             return View(material);
         }
@@ -196,11 +196,5 @@ namespace E_learning_portal.Controllers.MyControllers
 
             return View();
         }
-    }
-
-    public class Result
-    {
-        public string Error { get; set; }
-        public List<string> Files { get; set; }
     }
 }

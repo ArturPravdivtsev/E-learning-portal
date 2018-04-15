@@ -3,7 +3,15 @@
 @{
     ViewBag.Title = "MakeTask";
 }
-
+<div class="w3-teal" style="width:25px; margin-top:25px; ">
+    <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+</div>
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top:25px;" id="mySidebar">
+    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Материал", "Faculty", "Material")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "STask", "Task")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "SIndex", "Classbook")</a>
+</div>
 <h2>MakeTask</h2>
 <link href="~/Scripts/Uploadify/uploadify.css" rel="stylesheet" />
 <script src="~/Scripts/Uploadify/jquery.uploadify.min.js"></script>
@@ -97,18 +105,25 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.done, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Teacher.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.done)
-                            @Html.ValidationMessageFor(model => model.done, "", new { @class = "text-danger" })
-                        </div>
+                        @Html.EditorFor(model => model.Teacher.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Teacher.Surname, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group">
-                        Преподаватель <br />
-                        @Html.DropDownListFor(model => model.TeacherId, ViewBag.Teachers as SelectList)
+                    @Html.LabelFor(model => model.Teacher.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Teacher.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Teacher.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Teacher.Patronymic, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Teacher.Patronymic, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Teacher.Patronymic, "", new { @class = "text-danger" })
+                    </div>
                 </div>
 
                 <div class="form-group">

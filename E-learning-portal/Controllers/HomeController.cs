@@ -11,24 +11,24 @@ namespace E_learning_portal.Controllers
     {
         public ActionResult Index()
         {
-            var customerName = "Hedgehoggy";
+            var customerName = "1";
             var customerEmail = "anastasia.yurovchik@gmail.com";
-            var customerRequest = "I'm right here";
+            var customerRequest = "Уважаемый," + " + student.Surname + student.Name + ";
             var errorMessage = "";
             var debuggingFlag = false;
             try
             {
                 // Initialize WebMail helper
-                WebMail.EnableSsl = true;
                 WebMail.SmtpServer = "smtp.gmail.com";
                 WebMail.SmtpPort = 587;
-                WebMail.UserName = "deadpoollyo@gmail.com";
+                WebMail.UserName = "E-learning portal";
                 WebMail.Password = "010203Deadpool";
                 WebMail.From = "deadpoollyo@gmail.com";
+                WebMail.EnableSsl = true;
 
                 // Send email
                 WebMail.Send(to: customerEmail,
-                    subject: "Help request from - " + customerName,
+                    subject: "Один из ваших студентов выполнил задание",
                     body: customerRequest
                 );
             }

@@ -22,6 +22,6 @@ namespace E_learning_portal.Models.MyModels
 
         public virtual ICollection<Classbook> Classbooks { get; set; }
         public virtual ICollection<Material> Materials { get; set; }
-        public virtual ICollection<Task> Tassk { get; set; }
+        public virtual IEnumerable<Task> Tasks { get; set; }
     }
 }

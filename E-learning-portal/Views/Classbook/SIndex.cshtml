@@ -1,8 +1,10 @@
-﻿@model IEnumerable<E_learning_portal.Models.MyModels.Material>
+﻿@model IEnumerable<E_learning_portal.Models.MyModels.Classbook>
 
 @{
-    ViewBag.Title = "Название";
+    ViewBag.Title = "SIndex";
 }
+
+<h2>SIndex</h2>
 <div class="w3-teal" style="width:25px; margin-top:25px; ">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
 </div>
@@ -12,12 +14,13 @@
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "STask", "Task")</a>
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "SIndex", "Classbook")</a>
 </div>
-<h2>Название</h2>
-
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course)
         </th>
         <th></th>
     </tr>
@@ -25,10 +28,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.Subject)
         </td>
         <td>
-            @Html.ActionLink("Details", "Content", new { id=item.MaterialId }) |
+            @Html.DisplayFor(modelItem => item.Course)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "MarkDetails", new { id=item.ClassbookId }) |
         </td>
     </tr>
 }

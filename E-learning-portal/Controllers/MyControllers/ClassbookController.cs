@@ -21,11 +21,11 @@ namespace E_learning_portal.Controllers.MyControllers
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
             string ID = currentUser.Id;
             Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            IEnumerable<Classbook> classbook = context.Classbooks.Include("Teacher");
-            var selectedClassbook = from classbooks in classbook
-                                    where classbooks.TeacherId == t.TeacherId
-                                    select classbooks;
-            return View(selectedClassbook.Distinct().GroupBy(p=>p.Course));
+            IEnumerable<Classbook> classbook = context.Classbooks.Where(p=>p.TeacherId == t.TeacherId);
+            //var selectedClassbook = from classbooks in classbook
+            //                        where classbooks.TeacherId == t.TeacherId
+            //                        select classbooks;
+            return View(classbook);
         }
 
         public ActionResult SIndex()
@@ -35,11 +35,11 @@ namespace E_learning_portal.Controllers.MyControllers
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
             string ID = currentUser.Id;
             Student t = context.Students.SingleOrDefault(p => p.Id == ID);
-            IEnumerable<Classbook> classbook = context.Classbooks.Include("Student");
-            var selectedClassbook = from classbooks in classbook
-                                    where classbooks.StudentId == t.StudentId
-                                    select classbooks;
-            return View(selectedClassbook.Distinct().GroupBy(p => p.Course));
+            IEnumerable<Classbook> classbook = context.Classbooks.Where(p => p.StudentId == t.StudentId);
+            //var selectedClassbook = from classbooks in classbook
+            //                        where classbooks.StudentId == t.StudentId
+            //                        select classbooks;
+            return View(classbook);
         }
 
         public ActionResult AddMark()
@@ -92,6 +92,8 @@ namespace E_learning_portal.Controllers.MyControllers
                     Mark = Int32.Parse(Mark),
                     Date = DateTime.Parse(Date)
                 };
+                context.Classbooks.Add(classbook);
+                context.SaveChanges();
                 //goto m1;
             }
             //var html = string.Empty;
@@ -100,7 +102,8 @@ namespace E_learning_portal.Controllers.MyControllers
             //      + "</div>";
             //return View("AddMark",html);
             //m1:
-            return View("AddMark");
+            //return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -150,7 +153,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult MarkDetails(int? id)
+        public ActionResult TMarkDetails(int? id)
         {
             if (id == null)
             {
@@ -159,6 +162,16 @@ namespace E_learning_portal.Controllers.MyControllers
             Classbook classbook = context.Classbooks.SingleOrDefault(p=>p.ClassbookId == id);
             SelectList students = new SelectList(context.Students, "StudentId", "Name,Surname");
             ViewBag.Students = students;
+            return View(classbook);
+        }
+
+        public ActionResult MarkDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+            Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
             return View(classbook);
         }
 

@@ -15,7 +15,7 @@ namespace E_learning_portal.Controllers.MyControllers
     {
         ApplicationDbContext context = new ApplicationDbContext();
         // GET: Task
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
@@ -108,7 +108,7 @@ namespace E_learning_portal.Controllers.MyControllers
             Task task = context.Tasks.SingleOrDefault(p => p.TaskId == id);
             context.Tasks.Remove(task);
             context.SaveChanges();
-            return RedirectToAction("Task");
+            return RedirectToAction("Index");
         }
 
         public ActionResult TeacherTaskDetails(int? id)
@@ -121,6 +121,15 @@ namespace E_learning_portal.Controllers.MyControllers
             Task task = context.Tasks.SingleOrDefault(p => p.TaskId == id);
 
             return View(task);
+        }
+
+        public ActionResult STask()
+        {
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+            string ID = currentUser.Id;
+            Student t = context.Students.SingleOrDefault(p => p.Id == ID);
+            return View();
         }
 
         public ActionResult SUTask(int? id)
@@ -197,9 +206,9 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(task);
         }
 
-        public ActionResult MakeTask(int? id)
+        public ActionResult MakeTask(int? id, Task task)
         {
-            SelectList teachers = new SelectList(context.Teachers, "TeacherId", "Name,Surname");
+            SelectList teachers = new SelectList(context.Teachers, "TeacherId", "Surname");
             ViewBag.Teachers = teachers;
             return View();
         }
@@ -213,6 +222,12 @@ namespace E_learning_portal.Controllers.MyControllers
             string ID = currentUser.Id;
             Student student = context.Students.SingleOrDefault(p => p.Id == ID);
             task.StudentId = student.StudentId;
+            //IEnumerable<Teacher> teachers = context.Teachers.SelectMany(p=>p.Surname == task.Teacher.Surname p=>p.Patronymic==task.Teacher.Patronymic);
+            var selectedTeacher = from teacher in context.Teachers
+                               where teacher.Surname==task.Teacher.Surname && teacher.Name == task.Teacher.Name && teacher.Patronymic == task.Teacher.Patronymic  /*&& teacher.TeacherId == 1*/
+                               select teacher;
+            task.Teacher = selectedTeacher.Single();
+            task.done = true;
             context.Tasks.Add(task);
             context.SaveChanges();
 
@@ -228,7 +243,7 @@ namespace E_learning_portal.Controllers.MyControllers
             {
                 // Initialize WebMail helper
                 WebMail.EnableSsl = true;
-                WebMail.SmtpServer = "smtp.provider.com";
+                WebMail.SmtpServer = "smtp.gmail.com";
                 WebMail.SmtpPort = 587;
                 WebMail.UserName = "E-learning portal";
                 WebMail.Password = "010203Deadpool";
@@ -244,7 +259,7 @@ namespace E_learning_portal.Controllers.MyControllers
             {
                 errorMessage = ex.Message;
             }
-            return View();
+            return View("STask");
         }
     }
 }

@@ -335,6 +335,10 @@
     <Content Include="Views\Task\DoneDetails.cshtml" />
     <Content Include="Views\Task\DoneEdit.cshtml" />
     <Content Include="Views\Task\MakeTask.cshtml" />
+    <Content Include="Views\Classbook\SIndex.cshtml" />
+    <Content Include="Views\Task\DTask.cshtml" />
+    <Content Include="Views\Task\UTask.cshtml" />
+    <Content Include="Views\Classbook\TMarkDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

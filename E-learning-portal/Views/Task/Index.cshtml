@@ -2,7 +2,17 @@
 @{
     ViewBag.Title = "Задания";
 }
-
+<div class="w3-teal" style="width:25px; margin-top:25px; ">
+    <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+</div>
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top:25px;" id="mySidebar">
+    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Материал", "Material", "Material")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "Index", "Task")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "Index", "Classbook")</a>
+</div>
 <h2>Задания</h2>
-@Html.ActionLink("Задания", "UTask", new { id = Model.TaskId });
-@Html.ActionLink("Выполненные задания", "DTask", new { id = Model.TaskId })
+
+@Html.ActionLink("Создать задание", "Create");
+@Html.ActionLink("Задания", "UTask");
+@Html.ActionLink("Выполненные задания", "DTask")
