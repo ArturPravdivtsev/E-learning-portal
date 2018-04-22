@@ -22,7 +22,7 @@ namespace E_learning_portal.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("E-learning portal", throwIfV1Schema: false)
         {
         }
         public DbSet<Classbook> Classbooks { get; set; }
@@ -30,7 +30,6 @@ namespace E_learning_portal.Models
         public DbSet<Student> Students { get; set; }
         public DbSet<MyModels.Task> Tasks { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<Group> Groups { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -15,6 +15,7 @@ namespace E_learning_portal.Controllers.MyControllers
     {
         ApplicationDbContext context = new ApplicationDbContext();
         // GET: Task
+        [Authorize(Roles = "teacher")]
         public ActionResult Index(int? id)
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -24,6 +25,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View();
         }
 
+        [Authorize(Roles = "teacher")]
         public ActionResult DTask(int? id)
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -37,6 +39,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(selectedTask);
         }
 
+        [Authorize(Roles = "teacher")]
         public ActionResult UTask(int? id)
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -50,6 +53,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(selectedTask);
         }
 
+        [Authorize(Roles = "teacher")]
         public ActionResult Create()
         {
             SelectList students = new SelectList(context.Students, "StudentId", "Surname");
@@ -72,6 +76,7 @@ namespace E_learning_portal.Controllers.MyControllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,7 @@ namespace E_learning_portal.Controllers.MyControllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "teacher")]
         public ActionResult Edit(Task task)
         {
             Task taskContext = context.Tasks.SingleOrDefault(p => p.TaskId == task.TaskId);
@@ -111,6 +117,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "teacher")]
         public ActionResult TeacherTaskDetails(int? id)
         {
             if (id == null)
@@ -123,6 +130,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(task);
         }
 
+        [Authorize(Roles = "student")]
         public ActionResult STask()
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -132,6 +140,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View();
         }
 
+        [Authorize(Roles = "student")]
         public ActionResult SUTask(int? id)
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -145,6 +154,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(selectedTask);
         }
 
+        [Authorize(Roles = "student")]
         public ActionResult SDTask(int? id)
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -158,6 +168,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(selectedTask);
         }
 
+        [Authorize(Roles = "student")]
         public ActionResult DoneDetails(int? id)
         {
             if (id == null)
@@ -170,6 +181,7 @@ namespace E_learning_portal.Controllers.MyControllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "student")]
         public ActionResult DoneEdit(int? id)
         {
             if (id == null)
@@ -184,6 +196,7 @@ namespace E_learning_portal.Controllers.MyControllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "student")]
         public ActionResult DoneEdit(Task task)
         {
             Task taskContext = context.Tasks.SingleOrDefault(p => p.TaskId == task.TaskId);
@@ -196,6 +209,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return RedirectToAction("Task");
         }
 
+        [Authorize(Roles = "student")]
         public ActionResult UndoneDetails(int? id)
         {
             if (id == null)
@@ -206,6 +220,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(task);
         }
 
+        [Authorize(Roles = "student")]
         public ActionResult MakeTask(int? id, Task task)
         {
             SelectList teachers = new SelectList(context.Teachers, "TeacherId", "Surname");

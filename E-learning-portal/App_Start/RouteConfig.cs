@@ -17,7 +17,9 @@ namespace E_learning_portal
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+
             );
+            routes.MapRoute("Jquery", "Classbook/AddMarkData/", new { controller = "Classbook", action = "AddMarkData" });
         }
     }
 }

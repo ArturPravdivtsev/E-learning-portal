@@ -39,6 +39,11 @@ namespace E_learning_portal.Controllers
             return View();
         }
 
+        public ActionResult SIndex()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

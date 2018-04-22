@@ -15,6 +15,7 @@ namespace E_learning_portal.Controllers.MyControllers
     {
         ApplicationDbContext context = new ApplicationDbContext();
         // GET: Teacher
+        [Authorize(Roles = "teacher")]
         public ActionResult Index()
         {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -31,7 +32,9 @@ namespace E_learning_portal.Controllers.MyControllers
             
             return View(t);
         }
+
         [HttpGet]
+        [Authorize(Roles = "teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -43,6 +46,7 @@ namespace E_learning_portal.Controllers.MyControllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "teacher")]
         public ActionResult Edit(Teacher teacher)
         {
             Teacher TeacherContext = context.Teachers
@@ -56,6 +60,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View("PC", teacher);
         }
 
+        [Authorize(Roles = "teacher")]
         public ActionResult PC(int? id)
         {
             if (id == null)
@@ -65,22 +70,6 @@ namespace E_learning_portal.Controllers.MyControllers
             Teacher teacher = context.Teachers.Single(p => p.TeacherId == id);
             return View(teacher);
         }
-
-        //public ActionResult Material(int? id)
-        //{
-        //    ApplicationDbContext context = new ApplicationDbContext();
-        //    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-        //    ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
-        //    string ID = currentUser.Id;
-        //    Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
-        //    IEnumerable<Material> material = db.Materials.Include("Teacher");
-        //    var selectedMaterial = from materials in material
-        //                        where materials.TeacherId == t.TeacherId 
-        //                        select materials;
-        //    //SelectList teachers = new SelectList(db.Teachers,"TeacherId","TeacherId");
-        //    //ViewBag.Teacher = context.teacher;
-        //    return View(selectedMaterial);
-        //}
 
     }
 }

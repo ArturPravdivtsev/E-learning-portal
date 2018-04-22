@@ -66,36 +66,42 @@
                     @Html.LabelFor(model => model.Faculty, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-9">
                         @Html.TextBoxFor(model => model.Faculty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Faculty)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Department, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-9">
                         @Html.TextBoxFor(model => model.Department, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Department)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-9">
                         @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name)
                     </div>
                 </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Subject, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-9">
                             @Html.TextBoxFor(model => model.Subject, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Subject)
                         </div>
                     </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Course, new { @class = "col-lg-2 control-label" })
                             <div class="col-lg-9">
                                 @Html.TextBoxFor(model => model.Course, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Course)
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Fil, new { @class = "col-lg-2 control-label" })
                             <div class="col-lg-9">
                                 @Html.TextAreaFor(model => model.Fil, new { @class = "form-control", @row = 5 })
+                                @Html.ValidationMessageFor(model => model.Fil)
                             </div>
                         </div>
 

@@ -14,6 +14,7 @@ namespace E_learning_portal.Controllers.MyControllers
     {
         ApplicationDbContext context = new ApplicationDbContext();
         // GET: Student
+        [Authorize(Roles = "student")]
         public ActionResult Index()
         {
             
@@ -32,6 +33,7 @@ namespace E_learning_portal.Controllers.MyControllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "student")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -49,11 +51,11 @@ namespace E_learning_portal.Controllers.MyControllers
                 .SingleOrDefault(p => p.StudentId == student.StudentId);
             StudentContext.Surname = student.Surname;
             StudentContext.Name = student.Name;
-            StudentContext.GroupId = student.GroupId;
             context.SaveChanges();
             return View("PC", student);
         }
 
+        [Authorize(Roles = "student")]
         public ActionResult PC(int? id)
         {
             if (id == null)

@@ -28,6 +28,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(selectedMaterial);
         }
 
+        [Authorize(Roles = "teacher")]
         public ActionResult Create()
         {
             
@@ -49,6 +50,7 @@ namespace E_learning_portal.Controllers.MyControllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,6 +90,7 @@ namespace E_learning_portal.Controllers.MyControllers
             return RedirectToAction("Material");
         }
 
+        [Authorize(Roles = "teacher")]
         public ActionResult TeacherMaterialDetails(int? id)
         {
 

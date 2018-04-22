@@ -77,11 +77,22 @@ namespace E_learning_portal.Controllers
 
             // Сбои при входе не приводят к блокированию учетной записи
             // Чтобы ошибки при вводе пароля инициировали блокирование учетной записи, замените на shouldLockout: true
+            ApplicationDbContext context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //return RedirectToLocal(returnUrl);
+                    var user = UserManager.FindByEmail(model.Email);
+                    var role = UserManager.GetRoles(user.Id.ToString());
+                    if (role[0].ToString() == "teacher")
+                    { return RedirectToAction("Index", "Home"); }
+                    else
+                    if (role[0].ToString() == "admin")
+                    { return RedirectToAction("Index","Admin"); }
+                    else
+                    { return RedirectToAction("SIndex", "Home"); }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -158,18 +169,23 @@ namespace E_learning_portal.Controllers
                 if (result.Succeeded)
                 {
                     if (model.TeacherRole) { await UserManager.AddToRoleAsync(user.Id, "teacher"); }
-                    else { await UserManager.AddToRoleAsync(user.Id, "student"); }
+                    else
+                    { await UserManager.AddToRoleAsync(user.Id, "student"); }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
                     // Отправка сообщения электронной почты с этой ссылкой
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
-
+                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                     //await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+                    if (model.Email == "admin@mail.ru")
+                    {
+                        await UserManager.AddToRoleAsync(user.Id, "admin");
+                        return RedirectToAction("Index", "Admin");
+                    }
                     if (model.TeacherRole)
                     { return RedirectToAction("Index", "Teacher"); }
-                    else
+                    else 
                     { return RedirectToAction("Index", "Student"); }
                 }
                 AddErrors(result);

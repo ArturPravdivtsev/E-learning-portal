@@ -66,6 +66,7 @@
                     @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-9">
                         @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name)
                     </div>
                 </div>
 
@@ -73,6 +74,7 @@
                     @Html.LabelFor(model => model.Subject, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-9">
                         @Html.TextBoxFor(model => model.Subject, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Subject)
                     </div>
                 </div>
 
@@ -80,6 +82,7 @@
                     @Html.LabelFor(model => model.Course, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-9">
                         @Html.TextBoxFor(model => model.Course, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Course)
                     </div>
                 </div>
 
@@ -92,6 +95,7 @@
                     @Html.LabelFor(model => model.Fil, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-9">
                         @Html.TextAreaFor(model => model.Fil, new { @class = "form-control", @row = 5 })
+                        @Html.ValidationMessageFor(model => model.Fil)
                     </div>
                 </div>
 
