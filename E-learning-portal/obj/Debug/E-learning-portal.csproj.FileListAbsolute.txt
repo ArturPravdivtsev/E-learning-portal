@@ -124,3 +124,12 @@ E:\учеба\C#\E-learning-portal\E-learning-portal\bin\DevExpress.Web.ASPxTree
 E:\учеба\C#\E-learning-portal\E-learning-portal\bin\DevExpress.Web.Mvc.v12.2.dll
 E:\учеба\C#\E-learning-portal\E-learning-portal\bin\DevExpress.Web.v12.2.dll
 E:\учеба\C#\E-learning-portal\E-learning-portal\bin\DevExpress.XtraPivotGrid.v12.2.dll
+E:\учеба\C#\E-learning-portal\E-learning-portal\bin\Castle.Core.dll
+E:\учеба\C#\E-learning-portal\E-learning-portal\bin\Moq.dll
+E:\учеба\C#\E-learning-portal\E-learning-portal\bin\System.Threading.Tasks.Extensions.dll
+E:\учеба\C#\E-learning-portal\E-learning-portal\bin\System.ValueTuple.dll
+E:\учеба\C#\E-learning-portal\E-learning-portal\bin\Castle.Core.xml
+E:\учеба\C#\E-learning-portal\E-learning-portal\bin\Moq.pdb
+E:\учеба\C#\E-learning-portal\E-learning-portal\bin\Moq.xml
+E:\учеба\C#\E-learning-portal\E-learning-portal\bin\System.Threading.Tasks.Extensions.xml
+E:\учеба\C#\E-learning-portal\E-learning-portal\bin\System.ValueTuple.xml

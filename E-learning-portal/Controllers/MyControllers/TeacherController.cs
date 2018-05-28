@@ -57,7 +57,7 @@ namespace E_learning_portal.Controllers.MyControllers
             TeacherContext.Department = teacher.Department;
             context.SaveChanges();
             //return RedirectToAction("PC");
-            return View("PC", teacher);
+            return RedirectToAction("TIndex","Start");
         }
 
         [Authorize(Roles = "teacher")]

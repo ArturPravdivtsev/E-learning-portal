@@ -1,10 +1,10 @@
 ﻿@model E_learning_portal.Models.MyModels.Classbook
 
 @{
-    ViewBag.Title = "MarkDetails";
+    ViewBag.Title = "Детали";
 }
 
-<h2>MarkDetails</h2>
+<h2>Детали</h2>
 
 <div class="w3-teal" style="width:25px; margin-top:25px; ">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
@@ -16,7 +16,7 @@
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "SIndex", "Classbook")</a>
 </div>
 <div>
-    <h4>Classbook</h4>
+    <h4>Журнал</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -72,6 +72,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ClassbookId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.ClassbookId }) |
+    @Html.ActionLink("Назад", "Index")
 </p>

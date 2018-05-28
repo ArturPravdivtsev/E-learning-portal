@@ -52,7 +52,7 @@ namespace E_learning_portal.Controllers.MyControllers
             StudentContext.Surname = student.Surname;
             StudentContext.Name = student.Name;
             context.SaveChanges();
-            return View("PC", student);
+            return RedirectToAction("SIndex", "Start");
         }
 
         [Authorize(Roles = "student")]

@@ -1,7 +1,7 @@
 ﻿@model E_learning_portal.Models.MyModels.Teacher
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактирование";
 }
 <div class="w3-teal" style="width:25px; margin-top:25px; ">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
@@ -12,14 +12,14 @@
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "Index", "Task")</a>
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "Index", "Classbook")</a>
 </div>
-<h2>Edit</h2>
+<h2>Редактирование</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Teacher</h4>
+        <h4>Преподаватель</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.TeacherId)

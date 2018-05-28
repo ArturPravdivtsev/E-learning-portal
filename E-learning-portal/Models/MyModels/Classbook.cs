@@ -31,4 +31,5 @@ namespace E_learning_portal.Models.MyModels
         public int? StudentId { get; set; }
         public Student Student { get; set; }
     }
+
 }

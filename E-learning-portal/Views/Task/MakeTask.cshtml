@@ -1,7 +1,7 @@
 ﻿@model E_learning_portal.Models.MyModels.Task
 
 @{
-    ViewBag.Title = "MakeTask";
+    ViewBag.Title = "Выполнение задания";
 }
 <div class="w3-teal" style="width:25px; margin-top:25px; ">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
@@ -12,7 +12,7 @@
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "STask", "Task")</a>
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "SIndex", "Classbook")</a>
 </div>
-<h2>MakeTask</h2>
+<h2>Выполнение задания</h2>
 <link href="~/Scripts/Uploadify/uploadify.css" rel="stylesheet" />
 <script src="~/Scripts/Uploadify/jquery.uploadify.min.js"></script>
 <script src="~/Scripts/Tinymce/tinymce.min.js"></script>
@@ -62,14 +62,14 @@
 
 
 <div class="panel panel-primary">
-    <div class="panel-heading panel-head">Add News</div>
+    <div class="panel-heading panel-head">Выполнить задание</div>
     <div class="panel-body">
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <h4>Task</h4>
+                <h4>Задание</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -128,7 +128,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Выполнить" class="btn btn-default" />
                     </div>
                 </div>
             </div>

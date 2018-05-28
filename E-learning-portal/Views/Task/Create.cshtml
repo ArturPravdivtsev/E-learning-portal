@@ -1,7 +1,8 @@
 ﻿@model E_learning_portal.Models.MyModels.Task
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Создать задание";
 }
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="w3-teal" style="width:25px; margin-top:25px; ">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
 </div>
@@ -57,7 +58,7 @@
 </script>
 
 <div class="panel panel-primary">
-    <div class="panel-heading panel-head">Add News</div>
+    <div class="panel-heading panel-head">Создать задание</div>
     <div class="panel-body">
         @using (Html.BeginForm("Create", "Task", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
@@ -86,10 +87,40 @@
                     </div>
                 </div>
 
-                <div>
-                    Студент <br />
-                    @Html.DropDownListFor(model => model.StudentId, ViewBag.Students as SelectList)
+                <div class="form-group">
+                    @Html.Label("Имя студента", new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-9">
+                        <input class="form-control"
+                               name="txtName"
+                               type="text"
+                               value="" } />
                 </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Фамилия студента", new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-9">
+                        <input class="form-control"
+                               name="txtSurname"
+                               type="text"
+                               value="" } />
+                </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Student.Name, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.Student.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Student.Name)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Student.Surname, new { @class = "col-lg-2 control-label" })
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(model => model.Student.Surname, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Student.Surname)
+                        </div>
+                    </div>*@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Fil, new { @class = "col-lg-2 control-label" })
@@ -99,15 +130,11 @@
                     </div>
                 </div>
 
-                @*<div class="form-group" id="uploaded">
-
-                    </div>*@
-
                 <div class="form-group">
                     <div class="col-lg-9"></div>
                     <div class="col-lg-3">
                         <button class="btn btn-success" id="btnSubmit" type="submit">
-                            Submit
+                            Принять
                         </button>
                     </div>
                 </div>

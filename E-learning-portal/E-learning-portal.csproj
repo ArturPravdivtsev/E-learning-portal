@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Data.v12.2, Version=12.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <HintPath>..\packages\DevExpress.MVC.12.2\lib\DevExpress.Data.v12.2.dll</HintPath>
       <Private>True</Private>
@@ -141,9 +145,21 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq, Version=4.8.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.8.2\lib\net45\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -368,7 +384,6 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Teacher\Edit.cshtml" />
     <Content Include="Views\Teacher\PC.cshtml" />
-    <Content Include="Views\Teacher\Material.cshtml" />
     <Content Include="Views\Material\Create.cshtml" />
     <Content Include="Views\Material\MaterialView.cshtml" />
     <Content Include="Views\Material\Material.cshtml" />
@@ -380,7 +395,6 @@
     <Content Include="Views\Task\TeacherTaskDetails.cshtml" />
     <Content Include="Views\Task\TaskView.cshtml" />
     <Content Include="Views\Classbook\Index.cshtml" />
-    <Content Include="Views\Classbook\Students.cshtml" />
     <Content Include="Views\Classbook\AddMark.cshtml" />
     <Content Include="Views\Classbook\EditMark.cshtml" />
     <Content Include="Views\Classbook\MarkDetails.cshtml" />
@@ -406,11 +420,23 @@
     <Content Include="Views\Task\UTask.cshtml" />
     <Content Include="Views\Classbook\TMarkDetails.cshtml" />
     <Content Include="Views\Home\SIndex.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Start\TIndex.cshtml" />
+    <Content Include="Views\Start\SIndex.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Students.cshtml" />
+    <Content Include="Views\Admin\SEdit.cshtml" />
+    <Content Include="Views\Admin\SDetails.cshtml" />
+    <Content Include="Views\Admin\Teachers.cshtml" />
+    <Content Include="Views\Admin\TEdit.cshtml" />
+    <Content Include="Views\Admin\Materials.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\TDetails.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="uploads\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

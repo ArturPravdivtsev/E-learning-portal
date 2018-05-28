@@ -1,6 +1,6 @@
 ﻿@model E_learning_portal.Models.MyModels.Material
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Создать";
 }
 <div class="w3-teal" style="width:25px; margin-top:25px; ">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
@@ -57,7 +57,7 @@
 </script>
 
 <div class="panel panel-primary">
-    <div class="panel-heading panel-head">Add News</div>
+    <div class="panel-heading panel-head">Добавить материал</div>
     <div class="panel-body">
         @using (Html.BeginForm("Create", "Material", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
@@ -113,7 +113,7 @@
                             <div class="col-lg-9"></div>
                             <div class="col-lg-3">
                                 <button class="btn btn-success" id="btnSubmit" type="submit">
-                                    Submit
+                                    Создать
                                 </button>
                             </div>
                         </div>

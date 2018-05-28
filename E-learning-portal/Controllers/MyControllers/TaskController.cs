@@ -32,7 +32,7 @@ namespace E_learning_portal.Controllers.MyControllers
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
             string ID = currentUser.Id;
             Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            IEnumerable<Task> task = context.Tasks.Include("Teacher");
+            IEnumerable<Task> task = context.Tasks.Include("Teacher").Include("Student");
             var selectedTask = from tasks in task
                                where tasks.TeacherId == t.TeacherId && tasks.done
                                select tasks;
@@ -46,7 +46,7 @@ namespace E_learning_portal.Controllers.MyControllers
             ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
             string ID = currentUser.Id;
             Teacher t = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            IEnumerable<Task> task = context.Tasks.Include("Teacher");
+            IEnumerable<Task> task = context.Tasks.Include("Teacher").Include("Student");
             var selectedTask = from tasks in task
                                where tasks.TeacherId == t.TeacherId && !tasks.done
                                select tasks;
@@ -64,15 +64,24 @@ namespace E_learning_portal.Controllers.MyControllers
         [HttpPost]
         public ActionResult Create(Task task)
         {
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
-
-            string ID = currentUser.Id;
-            Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
-            task.TeacherId = teacher.TeacherId;
-            context.Tasks.Add(task);
-            context.SaveChanges();
-            return View("TaskView", task);
+            if (ModelState.IsValid)
+            {
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
+                string Name = Request.Form["txtName"]; string Surname = Request.Form["txtSurname"];
+                string ID = currentUser.Id;
+                Teacher teacher = context.Teachers.SingleOrDefault(p => p.Id == ID);
+                task.TeacherId = teacher.TeacherId;
+                IEnumerable<Student> student = context.Students;
+                var selectedStudent = from students in student
+                                      where students.Name == Name && students.Surname == Surname
+                                      select students.StudentId;
+                task.StudentId = selectedStudent.Single();
+                context.Tasks.Add(task);
+                context.SaveChanges();
+                return RedirectToAction("UTask");
+            }
+            return RedirectToAction("Create",task);
         }
 
         [HttpGet]
@@ -94,14 +103,18 @@ namespace E_learning_portal.Controllers.MyControllers
         [Authorize(Roles = "teacher")]
         public ActionResult Edit(Task task)
         {
-            Task taskContext = context.Tasks.SingleOrDefault(p => p.TaskId == task.TaskId);
-            taskContext.Name = task.Name;
-            taskContext.Subject = task.Subject;
-            taskContext.Course = task.Course;
-            taskContext.Fil = task.Fil;
-            context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                Task taskContext = context.Tasks.SingleOrDefault(p => p.TaskId == task.TaskId);
+                taskContext.Name = task.Name;
+                taskContext.Subject = task.Subject;
+                taskContext.Course = task.Course;
+                taskContext.Fil = task.Fil;
+                context.SaveChanges();
 
-            return RedirectToAction("Task");
+                return RedirectToAction("Task");
+            }
+            return RedirectToAction("Edit",task);
         }
 
         public ActionResult Delete(int? id)
@@ -125,8 +138,9 @@ namespace E_learning_portal.Controllers.MyControllers
                 return new HttpStatusCodeResult(404);
             }
 
-            Task task = context.Tasks.SingleOrDefault(p => p.TaskId == id);
-
+            Task task = context.Tasks.Include("Student").SingleOrDefault(p => p.TaskId == id);
+            ViewBag.Name=context.Students.SingleOrDefault(p=>p.StudentId==task.StudentId).Name;
+            ViewBag.Surname = context.Students.SingleOrDefault(p => p.StudentId == task.StudentId).Surname;
             return View(task);
         }
 

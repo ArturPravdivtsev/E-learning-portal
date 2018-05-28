@@ -20,7 +20,7 @@ namespace E_learning_portal
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
@@ -29,11 +29,11 @@ namespace E_learning_portal
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css"
+                      "~/Content/bootstrap.min.css"
                       ));
-            bundles.Add(new StyleBundle("~/Content/cssm").Include(
-                      "~/Content/ForMaterial.css"
-                      ));
+            //bundles.Add(new StyleBundle("~/Content/cssm").Include(
+            //          "~/Content/ForMaterial.css"
+            //          ));
         }
     }
 }

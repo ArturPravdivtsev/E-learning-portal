@@ -11,6 +11,21 @@ using System.Web.UI;
 
 namespace E_learning_portal.Controllers.MyControllers
 {
+    public static class Utils
+    {
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
+        {
+            if (source != null)
+            {
+                foreach (T obj in source)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     public class ClassbookController : Controller
     {
         ApplicationDbContext context = new ApplicationDbContext();
@@ -54,8 +69,6 @@ namespace E_learning_portal.Controllers.MyControllers
         [HttpPost]
         public ActionResult AddMarkData()
         {
-            if (ModelState.IsValid)
-            {
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                 ApplicationUser currentUser = UserManager.FindById(User.Identity.GetUserId());
                 string ID = currentUser.Id;
@@ -65,78 +78,79 @@ namespace E_learning_portal.Controllers.MyControllers
                 string Name = Request.Form["txtName"]; string Surname = Request.Form["txtSurname"];
                 string TaskName = Request.Form["txtTaskName"]; string Mark = Request.Form["txtMark"];
                 string Date = Request.Form["txtDate"];
-
-
-                Session["Course"] = Course;
-                Session["Subject"] = Subject;
-                Session["Name"] = Name;
-                Session["Surname"] = Surname;
-                Session["TaskName"] = TaskName;
-                Session["Mark"] = Mark;
-                Session["Date"] = Date;
-
-
+            //if (Course == null || Subject == null || Name == null || Surname == null || TaskName == null || Mark == null || Date == null)
+            if(String.IsNullOrEmpty(Course)|| String.IsNullOrEmpty(Subject)|| String.IsNullOrEmpty(Name)|| String.IsNullOrEmpty(Surname)
+                || String.IsNullOrEmpty(TaskName)|| String.IsNullOrEmpty(Mark)|| String.IsNullOrEmpty(Date))
+                return View("AddMark");
+            else
+            {
                 //Student student = context.Students.Select(p => p.Name == Name);
                 IEnumerable<Student> students = context.Students;
                 var selectedStudent = from student in students
                                       where student.Name == Name && student.Surname == Surname
                                       select student.StudentId;
-                IEnumerable<Task> tasks = context.Tasks;
-                var selectedTask = from task in tasks
-                                   where task.Subject == Subject && task.Course == Int32.Parse(Course)
-                                   && task.Name == TaskName && task.TeacherId == t.TeacherId && task.StudentId == selectedStudent.Single()
-                                   select task;
-                IEnumerable<Classbook> classbooks = context.Classbooks;
-                var selectedClassbook = from classbooc in classbooks
-                                        where classbooc.Subject == Subject && classbooc.Course == Int32.Parse(Course)
-                                        && classbooc.TeacherId == t.TeacherId
-                                        && classbooc.StudentId == selectedStudent.Single()
-                                        select classbooc;
-                try
+                if (Utils.IsNullOrEmpty(selectedStudent))
                 {
-                    var s = selectedClassbook.Single();
+                    ViewBag.Error = "Студент не найден";
+                    return View("AddMark");
                 }
-                catch (System.InvalidOperationException)
+                else
                 {
-                    Classbook classbook = new Classbook
+                    IEnumerable<Task> tasks = context.Tasks;
+                    var selectedTask = from task in tasks
+                                       where task.Subject == Subject && task.Course == Int32.Parse(Course)
+                                       && task.Name == TaskName && task.TeacherId == t.TeacherId && task.StudentId == selectedStudent.Single()
+                                       select task;
+                    if (Utils.IsNullOrEmpty(selectedTask))
                     {
-                        TeacherId = t.TeacherId,
-                        Course = Int32.Parse(Course),
-                        Subject = Subject,
-                        StudentId = selectedStudent.Single(),
-                        Task = selectedTask.Single(),
-                        Mark = Int32.Parse(Mark),
-                        Date = DateTime.Parse(Date)
-                    };
-                    context.Classbooks.Add(classbook);
-                    context.SaveChanges();
-                    goto m1;
+                        ViewBag.Error = "Задание не найдено";
+                        return View("AddMark");
+                    }
+                    else
+                    {
+                        IEnumerable<Classbook> classbooks = context.Classbooks;
+                        var selectedClassbook = from classbooc in classbooks
+                                                where classbooc.Subject == Subject && classbooc.Course == Int32.Parse(Course)
+                                                && classbooc.TeacherId == t.TeacherId
+                                                && classbooc.StudentId == selectedStudent.Single()
+                                                select classbooc;
+                        if (Utils.IsNullOrEmpty(selectedClassbook))
+                        {
+                            Classbook classbook = new Classbook
+                            {
+                                TeacherId = t.TeacherId,
+                                Course = Int32.Parse(Course),
+                                Subject = Subject,
+                                StudentId = selectedStudent.Single(),
+                                Task = selectedTask.Single(),
+                                Mark = Int32.Parse(Mark),
+                                Date = DateTime.Parse(Date)
+                            };
+                            context.Classbooks.Add(classbook);
+                            context.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            ViewBag.Error = "Запись уже существует";
+                            return View("AddMark");
+                        };
+                    }
                 }
-                ViewData["ShowAlert"] = true;
-                return View("AddMark");
-                m1:
-                return View("Index");
             }
-            return View("AddMark");
         }
 
         [HttpGet]
         [Authorize(Roles = "teacher")]
         public ActionResult EditMark(int? id)
         {
-            if (ModelState.IsValid)
-            {
-                if (id == null)
+                 if (id == null)
                 {
                     return new HttpStatusCodeResult(404);
                 }
 
                 Classbook classbook = context.Classbooks.SingleOrDefault(p => p.ClassbookId == id);
-                SelectList students = new SelectList(context.Students, "StudentId", "Name,Surname");
-                ViewBag.Students = students;
                 return View(classbook);
-            }
-            return View();
         }
 
         [HttpPost]
@@ -200,6 +214,6 @@ namespace E_learning_portal.Controllers.MyControllers
             return View(classbook);
         }
 
-        
+
     }
 }

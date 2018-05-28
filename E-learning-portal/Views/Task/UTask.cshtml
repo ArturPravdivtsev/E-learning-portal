@@ -1,8 +1,7 @@
-﻿@using E_learning_portal.Models.MyModels
-@model IEnumerable<E_learning_portal.Models.MyModels.Task>
+﻿@model IEnumerable<E_learning_portal.Models.MyModels.Task>
 
 @{
-    ViewBag.Title = "UTask";
+    ViewBag.Title = "Невыполненные задания";
 }
 <div class="w3-teal" style="width:25px; margin-top:25px; ">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
@@ -13,7 +12,7 @@
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "Index", "Task")</a>
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "Index", "Classbook")</a>
 </div>
-<h2>UTask</h2>
+<h2>Невыполненные задания</h2>
 <table class="table">
     <tr>
         <th>
@@ -52,9 +51,9 @@
             @Html.DisplayFor(modelItem => item.Student.Surname)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TaskId }) |
-            @Html.ActionLink("Details", "TeacherTaskDetails", new { id=item.TaskId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TaskId })
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.TaskId }) |
+            @Html.ActionLink("Детали", "TeacherTaskDetails", new { id=item.TaskId }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.TaskId })
         </td>
     </tr>
 }

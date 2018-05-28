@@ -9,8 +9,15 @@ namespace E_learning_portal.Controllers.MyControllers
     public class StartController : Controller
     {
         // GET: Start
-        public ActionResult Index()
+        public ActionResult TIndex()
         {
+
+            return View();
+        }
+
+        public ActionResult SIndex()
+        {
+
             return View();
         }
     }

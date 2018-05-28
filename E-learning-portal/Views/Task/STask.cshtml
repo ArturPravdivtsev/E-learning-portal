@@ -1,7 +1,7 @@
 ﻿@model E_learning_portal.Models.MyModels.Task
 
 @{
-    ViewBag.Title = "STask";
+    ViewBag.Title = "Меню заданий";
 }
 <div class="w3-teal" style="width:25px; margin-top:25px; ">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
@@ -12,7 +12,7 @@
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "STask", "Task")</a>
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "SIndex", "Classbook")</a>
 </div>
-<h2>STask</h2>
+<h2>Меню заданий</h2>
 
 @Html.ActionLink("Задания", "SUTask");
 @Html.ActionLink("Выполненные задания", "SDTask")

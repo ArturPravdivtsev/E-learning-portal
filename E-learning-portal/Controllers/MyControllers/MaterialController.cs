@@ -46,7 +46,7 @@ namespace E_learning_portal.Controllers.MyControllers
             material.TeacherId = teacher.TeacherId;
             context.Materials.Add(material);
             context.SaveChanges();
-            return View("MaterialView", material);
+            return RedirectToAction("Material");
         }
 
         [HttpGet]
