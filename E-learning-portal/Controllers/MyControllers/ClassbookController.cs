@@ -118,11 +118,12 @@ namespace E_learning_portal.Controllers.MyControllers
                         {
                             Classbook classbook = new Classbook
                             {
+                                ClassbookId = 1,
                                 TeacherId = t.TeacherId,
                                 Course = Int32.Parse(Course),
                                 Subject = Subject,
-                                StudentId = selectedStudent.Single(),
-                                Task = selectedTask.Single(),
+                                StudentId = selectedStudent.First(),
+                                Task = selectedTask.First(),
                                 Mark = Int32.Parse(Mark),
                                 Date = DateTime.Parse(Date)
                             };

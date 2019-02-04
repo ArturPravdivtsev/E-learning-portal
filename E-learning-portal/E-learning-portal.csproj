@@ -385,7 +385,6 @@
     <Content Include="Views\Teacher\Edit.cshtml" />
     <Content Include="Views\Teacher\PC.cshtml" />
     <Content Include="Views\Material\Create.cshtml" />
-    <Content Include="Views\Material\MaterialView.cshtml" />
     <Content Include="Views\Material\Material.cshtml" />
     <Content Include="Views\Material\Edit.cshtml" />
     <Content Include="Views\Material\TeacherMaterialDetails.cshtml" />

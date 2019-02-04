@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<E_learning_portal.Models.MyModels.Material>
 
 @{
-    ViewBag.Title = "Кафедра";
+    ViewBag.Title = "Кафедры";
 }
-<div class="w3-teal" style="width:25px; margin-top:25px; ">
+<div class="w3-teal" style="width:25px; margin-top:25px; position:relative">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
 </div>
 <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top:25px;" id="mySidebar">
@@ -28,7 +28,7 @@
             @Html.DisplayFor(modelItem => item.Department)
         </td>
         <td>|
-            @Html.ActionLink("Детали", "Course", new { id=item.MaterialId }) |
+            @Html.ActionLink("Далее", "Course", new { id=item.MaterialId }) |
         </td>
     </tr>
 }

@@ -1,7 +1,7 @@
 ﻿@model E_learning_portal.Models.MyModels.Teacher
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Преподаватель";
 }
 <div class="w3-teal" style="width:25px; margin-top:25px; ">
     <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
@@ -12,7 +12,7 @@
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "Index", "Task")</a>
     <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "Index", "Classbook")</a>
 </div>
-<h2>Index</h2>
+<h2>Преподаватель</h2>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -50,7 +50,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.TeacherId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new {  id = Model.TeacherId })
 </p>
 

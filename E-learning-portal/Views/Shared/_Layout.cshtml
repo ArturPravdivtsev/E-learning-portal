@@ -21,12 +21,12 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ЭПДО-КГУ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                @*<ul class="nav navbar-nav">
                     <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                </ul>
+                </ul>*@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -34,8 +34,10 @@
  
 
     <!-- Page Content -->
-
-    <div class="container body-content">
+    <aside class="main-sidebar">
+        <section class="sidebar"></section>
+    </aside>
+    <div class="container body-content" style="margin-top:50px">
        
         @RenderBody()
         <hr />

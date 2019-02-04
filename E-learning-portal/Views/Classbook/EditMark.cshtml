@@ -20,7 +20,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Classbook</h4>
+        <h4>Журнал оценок</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ClassbookId)
@@ -68,7 +68,6 @@
                 <input type="submit" value="Сохранить" class="btn btn-default" />
             </div>
         </div>
-    </div>
 }
 
 <div>

@@ -17,7 +17,7 @@ namespace E_learning_portal.Models.MyModels
         public int Mark { get; set; }
         [System.ComponentModel.DisplayName("Дата")]
         
-        [RegularExpression("[1-31]+[.]+.[1-12]+.+[2000-3000]", ErrorMessage = "Некорректная дата")]
+        //[RegularExpression("[1-31]+[.]+.[1-12]+.+[2000-3000]", ErrorMessage = "Некорректная дата")]
         public DateTime Date { get; set; }
         [System.ComponentModel.DisplayName("Предмет")]
         
