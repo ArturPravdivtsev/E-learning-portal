@@ -1,0 +1,122 @@
+﻿@model E_learning_portal.Models.MyModels.Task
+
+@{
+    ViewBag.Title = "Редактирование";
+}
+<div class="w3-teal" style="width:25px; margin-top:25px; ">
+    <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+</div>
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top:25px;" id="mySidebar">
+    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Материал", "Faculty", "Material")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "STask", "Task")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "SIndex", "Classbook")</a>
+</div>
+<h2>Редактировать</h2>
+<link href="~/Scripts/Uploadify/uploadify.css" rel="stylesheet" />
+<script src="~/Scripts/Uploadify/jquery.uploadify.min.js"></script>
+<script src="~/Scripts/Tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#Fil',
+        height: 500,
+        theme: 'modern',
+        plugins: [
+          'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+          'searchreplace wordcount visualblocks visualchars code fullscreen',
+          'insertdatetime media nonbreaking save table contextmenu directionality',
+          'emoticons template paste textcolor colorpicker textpattern imagetools'
+        ],
+        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        toolbar2: 'print preview media | forecolor backcolor emoticons ',
+        image_advtab: true,
+
+
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#file_upload').uploadify({
+
+            'swf': '/Scripts/Uploadify/uploadify.swf',
+            'uploader': "@Url.Action("Upload", "Task")",
+            'cancelImg': "@Url.Content("/Scripts/Uploadify/uploadify-cancel.png")",
+            'fileSizeLimit': '20MB', // Add Kb, MB, GB
+            'buttonText': 'Insert Images...', //Text for button
+            'queueSizeLimit': 10, // Max number of files allowed
+            'fileTypeDesc': 'Image Files',
+            'fileTypeExts': '*.gif; *.jpg; *.png', // File type allowed
+            'onUploadSuccess': function (file, data, response) {
+                tinyMCE.activeEditor.execCommand("mceInsertContent", true, "<img src='" + data + "' alt='Uploaded Image' class='img-responsive' />");
+            }
+
+        })
+
+    }
+);
+</script>
+
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Редактировать задание</div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Task</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.TaskId)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Course, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Course, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Course, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div>
+                    Студент <br />
+                    @Html.DropDownListFor(model => model.StudentId, ViewBag.Students as SelectList)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Fil, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Fil, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Fil, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Сохранить" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+    <div>
+        @Html.ActionLink("Назад", "SDTask")
+    </div>

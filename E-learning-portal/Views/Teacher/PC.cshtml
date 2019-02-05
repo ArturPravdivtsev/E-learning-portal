@@ -1,0 +1,56 @@
+﻿@model E_learning_portal.Models.MyModels.Teacher
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="w3-teal" style="width:25px; margin-top:25px; ">
+    <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+</div>
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top:25px;" id="mySidebar">
+    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Материал", "Material", "Material")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "Index", "Task")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "Index", "Classbook")</a>
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patronymic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit") |
+    @Html.ActionLink("Назад", "Index")
+</p>
+

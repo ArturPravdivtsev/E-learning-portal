@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Добавить оценку";
+}
+
+<h2>Добавить оценку</h2>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div class="w3-teal" style="width:25px; margin-top:25px; ">
+    <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+</div>
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top:25px;" id="mySidebar">
+    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Материал", "Material", "Material")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "Index", "Task")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "Index", "Classbook")</a>
+</div>
+
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+<script>
+    $.ajax({
+    type: 'POST',
+    url: '/Classbook/AddMarkData',
+    data: $('#myForm').serialize(),
+    success: function (result) {
+        console.log(result);
+    }
+        });
+</script>
+
+@using (Html.BeginForm("AddMarkData", "Classbook"))
+{
+    @ViewBag.Error
+    <div id="myForm">
+        <ol>
+            <li>
+                @Html.Label("Курс")
+                <input class="w3-input"
+                       name="txtCourse"
+                       type="text"
+                       value="" }/>
+            </li>
+            <li>
+                @Html.Label("Предмет")
+                <input class="w3-input"
+                       name="txtSubject"
+                       type="text"
+                       value="" }/>
+            </li>
+            <li>
+                @Html.Label("Имя студента")
+                <input class="w3-input"
+                       name="txtName"
+                       type="text"
+                       value="" }/>
+            </li>
+            <li>
+                @Html.Label("Фамилия студента")
+                <input class="w3-input"
+                       name="txtSurname"
+                       type="text"
+                       value="" }/>
+            </li>
+            <li>
+                @Html.Label("Название задания")
+                <input class="w3-input"
+                       name="txtTaskName"
+                       type="text"
+                       value="" }/>
+            </li>
+            <li>
+                @Html.Label("Оценка")
+                <input class="w3-input"
+                       name="txtMark"
+                       type="text"
+                       value="" }/>
+            </li>
+            <li>
+                @Html.Label("Дата")
+                <input class="w3-input"
+                       name="txtDate"
+                       type="text"
+                       value="" }/>
+            </li>
+        </ol>
+        <input type="submit" value="Добавить" />
+    </div>
+}
+<div id="divResult"></div>
+
+@if (ViewData["ShowAlert"] != null)
+{
+    <script type="text/javascript">
+        alert('Запись с такими данными существует!');
+        ViewData["ShowAlert"] = null;
+    </script>
+}

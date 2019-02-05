@@ -1,0 +1,34 @@
+﻿@model E_learning_portal.Models.MyModels.Student
+
+@{
+    ViewBag.Title = "Детали";
+}
+
+<h2>Детали</h2>
+
+<div>
+    <h4>Студент</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "SEdit", new { id = item.StudentId }) |
+    @Html.ActionLink("Назад", "Students")
+</p>

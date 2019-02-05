@@ -1,0 +1,64 @@
+﻿@model IEnumerable<E_learning_portal.Models.MyModels.Task>
+
+@{
+    ViewBag.Title = "Выполненные задания";
+}
+<div class="w3-teal" style="width:25px; margin-top:25px; ">
+    <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+</div>
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top:25px;" id="mySidebar">
+    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Материал", "Faculty", "Material")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Задание", "STask", "Task")</a>
+    <a href="#" class="w3-bar-item w3-button">@Html.ActionLink("Журнал", "SIndex", "Classbook")</a>
+</div>
+<h2>Выполненные задания</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.Surname)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.Surname)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "DoneEdit", new { id = item.TaskId }) |
+                @Html.ActionLink("Детали", "DoneDetails", new { id = item.TaskId }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.TaskId })
+                
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Меню";
+}
+
+<h2>Меню</h2>
+
+<h3>Здесь вы можете выполнить следующие действия:</h3>
+<ul style="list-style-type:none">
+    <li>@Html.ActionLink("Отредактировать студентов", "Students", "Admin")</li>
+    <li>@Html.ActionLink("Отредактировать преподавателей", "Teachers", "Admin")</li>
+    <li>@Html.ActionLink("Добавить материал", "Materials", "Admin")</li>
+</ul>
